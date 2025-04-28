@@ -654,6 +654,10 @@ export async function _createServer(
           httpsOptions,
           config,
         )
+
+        const hooks = config.getSortedPluginHooks('serverUrlsResolved')
+        await Promise.all(hooks.map(async (hook) => await hook(server)))
+
         if (!isRestart && config.server.open) server.openBrowser()
       }
       return server

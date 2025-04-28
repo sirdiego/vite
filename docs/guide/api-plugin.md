@@ -330,6 +330,23 @@ Vite plugins can also provide hooks that serve Vite-specific purposes. These hoo
   })
   ```
 
+### `serverUrlsResolved`
+
+- **Type:** `(config: ViteDevServer) => void | Promise<void>`
+- **Kind:** `async`, `parallel`
+- **See also:** [ViteDevServer](./api-javascript#vitedevserver)
+
+  Hook for when the `ViteDevServer` is started and has resolved its URLs, when the `listen` method is finished.
+
+  ```js
+  const myPlugin = () => ({
+    name: 'server-urls-resolved',
+    serverUrlsResolved(server) {
+      console.log(server.resolvedUrls)
+    },
+  })
+  ```
+
 ### `transformIndexHtml`
 
 - **Type:** `IndexHtmlTransformHook | { order?: 'pre' | 'post', handler: IndexHtmlTransformHook }`

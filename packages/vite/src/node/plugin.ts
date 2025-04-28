@@ -14,7 +14,7 @@ import type {
   ResolvedConfig,
   UserConfig,
 } from './config'
-import type { ServerHook } from './server'
+import type { ServerHook, ViteDevServer } from './server'
 import type { IndexHtmlTransform } from './plugins/html'
 import type { EnvironmentModuleNode } from './server/moduleGraph'
 import type { ModuleNode } from './server/mixedModuleGraph'
@@ -312,6 +312,13 @@ export interface Plugin<A = any> extends RollupPlugin<A> {
       this: void,
       ctx: HmrContext,
     ) => Array<ModuleNode> | void | Promise<Array<ModuleNode> | void>
+  >
+
+  /**
+   * Use this hook to work with the resolved server URLs.
+   */
+  serverUrlsResolved?: ObjectHook<
+    (this: void, server: ViteDevServer) => void | Promise<void>
   >
 }
 
